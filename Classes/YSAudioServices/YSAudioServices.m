@@ -28,7 +28,7 @@
 - (void)dealloc
 {
     for (NSNumber *idNum in [self.sounds allValues]) {
-        AudioServicesDisposeSystemSoundID(idNum.unsignedLongValue);
+        AudioServicesDisposeSystemSoundID(idNum.unsignedIntValue);
     }
 }
 
@@ -44,7 +44,7 @@
 {
     NSNumber *idNum = [self.sounds objectForKey:[NSString stringWithFormat:@"%zd",soundNumber]];
     if (idNum) {
-        AudioServicesPlaySystemSound(idNum.unsignedLongValue);
+        AudioServicesPlaySystemSound(idNum.unsignedIntValue);
     }
 }
 
