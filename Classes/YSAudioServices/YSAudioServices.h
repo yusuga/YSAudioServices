@@ -10,7 +10,8 @@
 
 @interface YSAudioServices : NSObject
 
--(void)addSoundEffect:(NSUInteger)soundNumber url:(NSURL*)url;
--(void)playSoundEffect:(NSUInteger)soundNumber;
+- (void)addSoundEffect:(NSInteger)soundID
+                   url:(NSURL*)url;
+- (void)playSoundEffect:(NSInteger)soundID;
 
 @end

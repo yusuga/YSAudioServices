@@ -9,6 +9,14 @@
 #import "YSAudioServices.h"
 @import AudioToolbox;
 
+static inline SystemSoundID SystemSoundIDFromNSNumber(NSNumber *number) {
+#if __LP64__
+    return [number unsignedIntValue];
+#else
+    return [number unsignedLongValue];
+#endif
+}
+
 @interface YSAudioServices ()
 
 @property (nonatomic) NSMutableDictionary *sounds;
@@ -27,24 +35,25 @@
 
 - (void)dealloc
 {
-    for (NSNumber *idNum in [self.sounds allValues]) {
-        AudioServicesDisposeSystemSoundID(idNum.unsignedIntValue);
+    for (NSNumber *systemSoundIDNum in [self.sounds allValues]) {
+        AudioServicesDisposeSystemSoundID(SystemSoundIDFromNSNumber(systemSoundIDNum));
     }
 }
 
--(void)addSoundEffect:(NSUInteger)soundNumber url:(NSURL*)url
+- (void)addSoundEffect:(NSInteger)soundID
+                   url:(NSURL *)url
 {
-    SystemSoundID soundID;
-    AudioServicesCreateSystemSoundID((__bridge CFURLRef)url, &soundID);
-    [self.sounds setObject:[NSNumber numberWithUnsignedLong:soundID]
-                    forKey:[NSString stringWithFormat:@"%zd",soundNumber]];
+    SystemSoundID systemSoundID;
+    AudioServicesCreateSystemSoundID((__bridge CFURLRef)url, &systemSoundID);
+    [self.sounds setObject:@(systemSoundID)
+                    forKey:[NSString stringWithFormat:@"%zd", soundID]];
 }
 
--(void)playSoundEffect:(NSUInteger)soundNumber
+- (void)playSoundEffect:(NSInteger)soundID
 {
-    NSNumber *idNum = [self.sounds objectForKey:[NSString stringWithFormat:@"%zd",soundNumber]];
-    if (idNum) {
-        AudioServicesPlaySystemSound(idNum.unsignedIntValue);
+    NSNumber *systemSoundIDNum = [self.sounds objectForKey:[NSString stringWithFormat:@"%zd", soundID]];
+    if (systemSoundIDNum) {
+        AudioServicesPlaySystemSound(SystemSoundIDFromNSNumber(systemSoundIDNum));
     }
 }
 

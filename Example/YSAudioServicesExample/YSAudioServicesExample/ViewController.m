@@ -9,7 +9,7 @@
 #import "ViewController.h"
 #import "YSAudioServices.h"
 
-typedef NS_ENUM(NSUInteger, Sound) {
+typedef NS_ENUM(NSInteger, Sound) {
     SoundCoin,
     SoundJump,
 };
