@@ -47,4 +47,9 @@ typedef NS_ENUM(NSInteger, Sound) {
     [self.soundManager playSoundEffect:SoundJump];
 }
 
+- (IBAction)enableSwitchDidChange:(UISwitch *)sender
+{
+    [YSAudioServices setSharedDisabled:!sender.on];
+}
+
 @end

@@ -9,6 +9,8 @@
 #import "YSAudioServices.h"
 @import AudioToolbox;
 
+static BOOL __sharedDisabled;
+
 static inline SystemSoundID SystemSoundIDFromNSNumber(NSNumber *number) {
 #if __LP64__
     return [number unsignedIntValue];
@@ -51,10 +53,17 @@ static inline SystemSoundID SystemSoundIDFromNSNumber(NSNumber *number) {
 
 - (void)playSoundEffect:(NSInteger)soundID
 {
+    if (__sharedDisabled) return ;
+    
     NSNumber *systemSoundIDNum = [self.sounds objectForKey:[NSString stringWithFormat:@"%zd", soundID]];
     if (systemSoundIDNum) {
         AudioServicesPlaySystemSound(SystemSoundIDFromNSNumber(systemSoundIDNum));
     }
+}
+
++ (void)setSharedDisabled:(BOOL)disabled
+{
+    __sharedDisabled = disabled;
 }
 
 @end

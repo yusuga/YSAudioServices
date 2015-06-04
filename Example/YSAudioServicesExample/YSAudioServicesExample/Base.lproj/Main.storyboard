@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5056" systemVersion="13C1021" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="vXZ-lx-hvc">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7531" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="vXZ-lx-hvc">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7520"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
@@ -13,40 +14,68 @@
                         <viewControllerLayoutGuide type="bottom" id="2fi-mo-0CV"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="kh9-bI-dsS">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Msv-ry-38u">
-                                <rect key="frame" x="86" y="269" width="56" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Coin">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="coinButtonDidPush:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="B4k-hC-S06"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9ZO-pC-3ZQ">
-                                <rect key="frame" x="172" y="269" width="63" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Jump">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="jumpButtonDidPush:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="tSn-CE-gZ8"/>
-                                </connections>
-                            </button>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="49E-Kk-NBJ">
+                                <rect key="frame" x="237" y="265" width="127" height="69"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Msv-ry-38u">
+                                        <rect key="frame" x="0.0" y="0.0" width="56" height="30"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="56" id="R5Q-S1-XN1"/>
+                                            <constraint firstAttribute="height" constant="30" id="Y5C-Pj-apZ"/>
+                                        </constraints>
+                                        <state key="normal" title="Coin">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="coinButtonDidPush:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="B4k-hC-S06"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9ZO-pC-3ZQ">
+                                        <rect key="frame" x="64" y="0.0" width="63" height="30"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="63" id="EMd-dP-ZK1"/>
+                                            <constraint firstAttribute="height" constant="30" id="SaB-8f-LYj"/>
+                                        </constraints>
+                                        <state key="normal" title="Jump">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="jumpButtonDidPush:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="tSn-CE-gZ8"/>
+                                        </connections>
+                                    </button>
+                                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="CgR-R4-sMA">
+                                        <rect key="frame" x="39" y="38" width="51" height="31"/>
+                                        <connections>
+                                            <action selector="enableSwitchDidChange:" destination="vXZ-lx-hvc" eventType="valueChanged" id="3L8-sv-ya7"/>
+                                        </connections>
+                                    </switch>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="Msv-ry-38u" firstAttribute="leading" secondItem="49E-Kk-NBJ" secondAttribute="leading" id="D9i-BS-wye"/>
+                                    <constraint firstAttribute="bottom" secondItem="CgR-R4-sMA" secondAttribute="bottom" id="HaY-5d-BVh"/>
+                                    <constraint firstItem="9ZO-pC-3ZQ" firstAttribute="top" secondItem="49E-Kk-NBJ" secondAttribute="top" id="N3n-M7-02C"/>
+                                    <constraint firstItem="Msv-ry-38u" firstAttribute="top" secondItem="49E-Kk-NBJ" secondAttribute="top" id="OCt-e7-D2Z"/>
+                                    <constraint firstAttribute="trailing" secondItem="9ZO-pC-3ZQ" secondAttribute="trailing" id="UBO-k3-Ivc"/>
+                                    <constraint firstAttribute="centerX" secondItem="CgR-R4-sMA" secondAttribute="centerX" id="gq0-9o-DLB"/>
+                                    <constraint firstAttribute="height" constant="69" id="pVP-x2-GNP"/>
+                                    <constraint firstAttribute="width" constant="127" id="vEb-bn-sBM"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="centerY" secondItem="49E-Kk-NBJ" secondAttribute="centerY" id="4z9-Nm-r8e"/>
+                            <constraint firstAttribute="centerX" secondItem="49E-Kk-NBJ" secondAttribute="centerX" id="mfA-zs-5mV"/>
+                        </constraints>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="46" y="503"/>
         </scene>
     </scenes>
-    <simulatedMetricsContainer key="defaultSimulatedMetrics">
-        <simulatedStatusBarMetrics key="statusBar"/>
-        <simulatedOrientationMetrics key="orientation"/>
-        <simulatedScreenMetrics key="destination" type="retina4"/>
-    </simulatedMetricsContainer>
 </document>
