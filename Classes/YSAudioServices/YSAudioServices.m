@@ -19,6 +19,15 @@ static inline SystemSoundID SystemSoundIDFromNSNumber(NSNumber *number) {
 #endif
 }
 
+static inline void ys_dispatch_main_sync_safe(void(^block)(void))
+{
+    if ([NSThread isMainThread]) {
+        block();
+    } else {
+        dispatch_sync(dispatch_get_main_queue(), block);
+    }
+}
+
 @interface YSAudioServices ()
 
 @property (nonatomic) NSMutableDictionary *sounds;
@@ -45,20 +54,24 @@ static inline SystemSoundID SystemSoundIDFromNSNumber(NSNumber *number) {
 - (void)addSoundEffect:(NSInteger)soundID
                    url:(NSURL *)url
 {
-    SystemSoundID systemSoundID;
-    AudioServicesCreateSystemSoundID((__bridge CFURLRef)url, &systemSoundID);
-    [self.sounds setObject:@(systemSoundID)
-                    forKey:[NSString stringWithFormat:@"%zd", soundID]];
+    ys_dispatch_main_sync_safe(^{
+        SystemSoundID systemSoundID;
+        AudioServicesCreateSystemSoundID((__bridge CFURLRef)url, &systemSoundID);
+        [self.sounds setObject:@(systemSoundID)
+                        forKey:[NSString stringWithFormat:@"%zd", soundID]];
+    });
 }
 
 - (void)playSoundEffect:(NSInteger)soundID
 {
-    if (__sharedDisabled) return ;
-    
-    NSNumber *systemSoundIDNum = [self.sounds objectForKey:[NSString stringWithFormat:@"%zd", soundID]];
-    if (systemSoundIDNum) {
-        AudioServicesPlaySystemSound(SystemSoundIDFromNSNumber(systemSoundIDNum));
-    }
+    ys_dispatch_main_sync_safe(^{
+        if (__sharedDisabled) return ;
+        
+        NSNumber *systemSoundIDNum = [self.sounds objectForKey:[NSString stringWithFormat:@"%zd", soundID]];
+        if (systemSoundIDNum) {
+            AudioServicesPlaySystemSound(SystemSoundIDFromNSNumber(systemSoundIDNum));
+        }
+    });
 }
 
 + (void)setSharedDisabled:(BOOL)disabled
