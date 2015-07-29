@@ -49,7 +49,7 @@ typedef NS_ENUM(NSInteger, Sound) {
 
 - (IBAction)enableSwitchDidChange:(UISwitch *)sender
 {
-    [YSAudioServices setSharedDisabled:!sender.on];
+    [YSAudioServices setDisabled:!sender.on];
 }
 
 @end
