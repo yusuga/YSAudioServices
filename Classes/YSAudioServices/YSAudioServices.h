@@ -14,7 +14,7 @@
                    url:(NSURL*)url;
 - (void)playSoundEffect:(NSInteger)soundID;
 
-+ (void)setDisabled:(BOOL)disabled;
-+ (BOOL)disabled;
++ (void)setAllDisabled:(BOOL)disabled;
++ (BOOL)allDisabled;
 
 @end
